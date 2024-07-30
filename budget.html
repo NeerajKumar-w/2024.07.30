@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <link href="index.css" rel="stylesheet">
+    <style>
+        .box {
+            width: 700px;
+            height: 500px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .header {
+            height: 100px;
+            font-size: 14pt;
+            color: white;
+            background-color: blue;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .input {
+            background-color: #fee4c3;
+            height: 150px;
+            width: 100%;
+            display: grid;
+            grid-template-rows: auto none;
+            grid-template-columns: auto auto;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .selector {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-evenly;
+        }
+
+        .row {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .column {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            justify-content: space-evenly;
+        }
+
+        .btn {
+            height: 100px;
+            width: 100%;
+            background-color: #fee4c3;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+        }
+
+        button {
+            height: 70px;
+            width: 30%;
+            font-size: 12pt;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            background-color: blue;
+        }
+
+        table {
+            height: 350px;
+            width: 100%;
+            border: lightblue;
+            background-color: lightblue;
+        }
+
+        th {
+            background-color: blue;
+        }
+
+        tr {
+            background-color: #fee4c3;
+        }
+    </style>
+</head>
+
+<body>
+    <section class="content">
+        <div class="box">
+            <div class="header">Add a new transaction</div>
+            <div class="input">
+                <div class="selector">
+                    <div>
+                        Type :
+                    </div>
+                    <select id="selected">
+                        <option value="income">income</option>
+                        <option value="expense">expense</option>
+                    </select>
+                </div>
+                <div class="column">
+                    <div class="row">
+                        <div>Name : </div><input id="stuff" type="text" name="name" value="name">
+                    </div>
+                    <div class="row">
+                        <div>Amount : </div><input id="amountstuff" type="number" name="amount" value="amount">
+                    </div>
+                </div>
+            </div>
+            <div class="btn">
+                <button type="button" onclick="addtotable()"> Add to transactions</button>
+            </div>
+            <table id="table">
+                <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Amount</th>
+                    <th>Options</th>
+                </tr>
+            </table>
+        </div>
+    </section>
+    <script>
+        function addtotable() {
+            const table = document.getElementById("table");
+            const name = document.getElementById("stuff").value;
+            const amount = document.getElementById("amountstuff").value + ' ' + '$';
+            const type = document.getElementById("selected").value;
+            rowd = document.createElement("tr");
+            named = document.createElement("td");
+            amountd = document.createElement("td");
+            typed = document.createElement("td");
+            deleteted = document.createElement("td");
+            named.innerHTML = name;
+            amountd.innerHTML = amount;
+            typed.innerHTML = type;
+            deleteted.innerHTML = 'Delete';
+            deleteted.addEventListener("click", () => {
+                table.removeChild(rowd);
+            })
+            rowd.append(named, amountd, typed, deleteted);
+            table.append(rowd);
+        }
+    </script>
+</body>
+
+</html>
